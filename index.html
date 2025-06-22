@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Product Feedback</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Product Feedback</h1>
+    </header>
+
+    <main>
+
+        <section class="form-section">
+            <form id="feedbackForm" novalidate>
+                
+                <label for="name">Name:</label>
+                <input type="text" id="name" required />
+                <small class="error" id="nameError"></small>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required />
+                <small class="error" id="emailError"></small>
+
+                <label for="message">Your Feedback:</label>
+                <textarea id="message" maxlength="250" required></textarea>
+                <div class="char-count"><span id="charCount">0</span>/250</div>
+                <small class="error" id="messageError"></small>
+
+                <button type="submit">Submit</button>
+                <p class="success-msg" id="successMsg"></p>
+            </form>
+        </section>
+
+        <section class="output-section">
+            <h2>Feedback Received:</h2>
+            <ul id="feedbackList"></ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CodeMyte Academy</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
