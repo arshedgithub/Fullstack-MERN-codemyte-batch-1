@@ -3,21 +3,10 @@ const router = express.Router();
 
 const userController = require('./../controllers/userController')
 
-// CRUD Operation 
+router.get('/users', userController.getAllUsers );
 
-// GET /api/users => all users 
-router.get('/', userController.getAllUsers );
+router.get('/users/:id', userController.getUserById );
 
-// GET /api/users/:id => relevant user 
-router.get('/:id', userController.getUserById );
-
-// POST /api/users => new user
-router.post('/', userController.createNewUser );
-
-// PUT /api/users/:id => edit user
-router.put('/:id', userController.updateUser );
-
-// DELETE /api/users/:id => delete user
-router.delete('/:id', userController.deleteUser );
+router.post('/users', userController.createNewUser );
 
 module.exports = router;

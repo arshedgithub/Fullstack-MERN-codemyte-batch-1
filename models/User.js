@@ -1,24 +1,20 @@
-const mongoose = require('mongoose');
+const users = [
+    { id: 1, name: "John", email: "john@gmail.com" },
+    { id: 2, name: "Bob", email: "bob1@gmail.com" },
+    { id: 3, name: "Shaun", email: "shaun.2@gmail.com" }
+];
 
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    age: Number
-});
-
-const User = mongoose.model('User', userSchema)
+// should be come from database
 
 module.exports = {
-    findAll: async () => await User.find(),
-    findById: async (id) => await User.findById(id),
-    newUser: async (userData) => {
-        const user = new User(userData);
-        return await user.save();
-    },
-    updateUser: async (id, updatedData) => {
-       return await User.findByIdAndUpdate(id, updatedData)
-    },
-    deleteUser: async (id) => {
-        return await User.findByIdAndDelete(id);
+    findAll: () => users,
+    findById: (id) => users.find(user => user.id === id),
+    newUser: (user) => {
+        console.log(user)
+        // console.log(users.length, users.length + 1);
+        
+        // user.id = users.length + 1,
+        // users.push(user);
+        return user;
     }
 }

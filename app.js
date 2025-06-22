@@ -1,26 +1,15 @@
 const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
 
 const userRoute = require('./routes/userRoutes');
-const productRoute = require('./routes/productRoutes');
 
 const app = express();
-
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(MONGO_URI)
-    .then(() => console.log("MongoDB connected Successful!"))
-    .catch(err => console.log("MongoDB connection failed: ", err));
-
-app.use(express.json());
 
 app.get('/', function (req, res) {
     res.send("Welcome !");
 });
 
-app.use('/api/users', userRoute);
-app.use('/api/products', productRoute);
+// app.use(express.json);
+app.use('/api', userRoute);
 
 const port = 4000;
 app.listen(port, function () {
@@ -28,9 +17,9 @@ app.listen(port, function () {
 });
 
 
-// MVC - Model - View - Controller
+// MVC - Model - View - Controller  
 
-// Model - data & database logics,
+// Model - data & database logics, 
 // Controller - user input / app logics
 // View - displaying data / view engine( ejs, pug )
 
