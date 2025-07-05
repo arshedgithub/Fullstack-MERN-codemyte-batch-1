@@ -1,30 +1,60 @@
-## Day 4 - Integrating MongoDB database with Express.js
+## Day 5 - REST
 
-### 1. Create an account in MongoDB Atlas
+client => server (Request)
+client <= server (Response)
 
-cloud.mongodb.com
+API - Application Programming Interface
 
-### 2. Create a mongoDB database
+SOAP - XML
+REST - HTTP
+GraphQL - Query Language
+gRPC
+websocket
 
-new project > free cluster > get connection string
+RESTful API - RESTful Services
 
-### 3. Clone this project
+REST - REpresentational State Transfer
 
-clone or download this project to your local computer
 
-### 4. .env file
+### HTTP Methods
 
-Add your mongodb connection string to .env file created in root directory of the project
-Add this to your env file.
+verbs
 
-`MONGO_URI=<mongodb_connection_string>`
+CRUD Operations - Create, Read, Update, Delete
 
-### 5. install dependencies
+GET - Read
+PUT - Update
+POST - Create
+DELETE - Delete
 
-type below command in terminal to install all relevant dependencies of the project
+### resources
 
-`npm install` or `npm i`
+Product Model -> products (plural)
 
-### 6. start the server
+GET /api/products => all products 
+GET /api/products/:id => relevant user 
+POST /api/products => new user
+PUT /api/products/:id => edit user
+DELETE /api/products/:id => delete user
 
-`npm run start` for start the server and `npm run dev` for start the server in development mode.
+### /api prefix
+
+/api
+api. -> subdomain
+
+### versioning control
+
+/api/v3/products
+
+versioning control - Git
+
+
+### HTTP Statuses
+
+Status Code 
+
+100 - 199 => 
+200 - 299 => 
+300 - 399 => 
+400 - 499 => 
+500 - 599 => 
