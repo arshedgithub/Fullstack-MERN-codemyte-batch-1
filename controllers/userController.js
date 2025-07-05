@@ -1,8 +1,20 @@
 const User = require('./../models/User');
 
 exports.getAllUsers = async (req, res) => {
-    const users = await User.findAll();
-    res.send(users);
+    try {
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+        const sort = req.query.sort;
+
+        const result = await User.findWithPagination(page, limit, sort);
+        res.status(200).json({
+            success: true,
+            data: result.users,
+            pagination: result.pagination
+        });
+    } catch (error) {
+        res.status(500).json('Failed to get Users !')
+    }
 }
 
 exports.getUserById = async (req, res) => {
@@ -29,7 +41,7 @@ exports.updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const user = await User.updateUser(userId, req.body);
-        
+
         if (!user) {
             res.status(404).json("User Not Found");
         }

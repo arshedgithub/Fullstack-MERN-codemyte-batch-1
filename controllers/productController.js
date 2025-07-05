@@ -1,8 +1,20 @@
 const Product = require('../models/Product');
 
 exports.getAllProducts = async (req, res) => {
-    const products = await Product.findAll();
-    res.send(products);
+    try {
+        const page = parseInt(req.query.page);
+        const limit = parseInt(req.query.limit);
+        const sort = req.query.sort;
+
+        const result = await Product.findWithPagination(page, limit, sort);
+        res.status(200).json({
+            success: true,
+            data: result.products,
+            pagination: result.pagination
+        });
+    } catch (error) {
+        res.status(500).json('Failed to create Product !')
+    }
 }
 
 exports.getProductById = async (req, res) => {
@@ -29,7 +41,7 @@ exports.updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;
         const product = await Product.updateProduct(productId, req.body);
-        
+
         if (!product) {
             res.status(404).json("Product Not Found");
         }

@@ -20,5 +20,27 @@ module.exports = {
     },
     deleteUser: async (id) => {
         return await User.findByIdAndDelete(id);
+    },
+
+    findWithPagination: async (page = 1, limit = 2, sort = 'name') => {
+        const skip = (page - 1) * limit;
+
+        const users = await User.find()
+            .sort(sort)
+            .skip(skip)
+            .limit(parseInt(limit))
+
+        const total = await User.countDocuments();
+        const totalPages = Math.ceil(total/limit);
+
+        return {
+            users,
+            pagination: {
+                currentPage: parseInt(page),
+                totalPages,
+                totalItems: total,
+                itemPerPage: limit
+            }
+        }
     }
 }
