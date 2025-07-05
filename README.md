@@ -44,12 +44,10 @@ api. -> subdomain
 
 ### versioning control
 
-/api/v3/products
+/api/products
+version controlling - Git
 
-versioning control - Git
-
-
-### HTTP Statuses
+### HTTP Status code ranges
 
 Status Code 
 
@@ -58,3 +56,17 @@ Status Code
 300 - 399 => 
 400 - 499 => 
 500 - 599 => 
+
+Range	Type	Meaning
+100-199	Informational	Request received, continuing process.
+200-299	Success	The request was successfully received, understood, and accepted.
+300-399	Redirection	Further action is needed to complete the request (often involves URL redirection).
+400-499	Client Error	The request contains bad syntax or cannot be fulfilled (error on the client’s side).
+500-599	Server Error	The server failed to fulfill a valid request (error on the server’s side).
+
+
+### Pagination
+
+query param
+
+
