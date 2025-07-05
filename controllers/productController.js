@@ -3,7 +3,7 @@ const Product = require('../models/Product');
 exports.getAllProducts = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 2;
+        const limit = parseInt(req.query.limit) || 10;
         const sort = req.query.sort || 'name';
 
         const result = await Product.findWithPagination(page, limit, sort);
