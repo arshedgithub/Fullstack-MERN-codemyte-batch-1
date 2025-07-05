@@ -23,11 +23,6 @@ module.exports = {
     },
 
     findWithPagination: async (page = 1, limit = 2, sort = 'name') => {
-        
-        if (page == NaN) page = 1;
-        if (limit == NaN) page = 2;
-        console.log(page, limit, sort);
-        
         const skip = (page - 1) * limit;
 
         const products = await Product.find()

@@ -2,9 +2,9 @@ const User = require('./../models/User');
 
 exports.getAllUsers = async (req, res) => {
     try {
-        const page = parseInt(req.query.page);
-        const limit = parseInt(req.query.limit);
-        const sort = req.query.sort;
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 2;
+        const sort = req.query.sort || 'name';
 
         const result = await User.findWithPagination(page, limit, sort);
         res.status(200).json({
