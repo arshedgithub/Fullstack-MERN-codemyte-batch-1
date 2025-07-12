@@ -2,7 +2,7 @@ const productDao = require('../dao/productDao');
 const logger = require('../utils/logger');
 
 exports.getAllProducts = async (req, res) => {
-    logger.info("getting All Products");
+    logger.info("Getting all products");
 
     try {
         const page = parseInt(req.query.page) || 1;
@@ -10,62 +10,87 @@ exports.getAllProducts = async (req, res) => {
         const sort = req.query.sort || 'name';
 
         const result = await productDao.findWithPagination(page, limit, sort);
-        logger.info("All Products retrieved succesfully", "produtController", "getAllProducts");
+        logger.info("Successfully retrieved all products");
+        
         res.status(200).json({
             success: true,
             data: result.products,
             pagination: result.pagination
         });
     } catch (error) {
-        logger.error("Error in get All products", error);
-        res.status(500).json('Failed to create Product !')
+        logger.error("Failed to get products", error);
+        res.status(500).json('Failed to get Products !')
     }
 }
 
 exports.getProductById = async (req, res) => {
     const productId = req.params.id;
-    const product = await productDao.findById(productId);
+    logger.info(`Getting product by ID: ${productId}`);
+    
+    try {
+        const product = await productDao.findById(productId);
 
-    if (!product) {
-        res.status(404).json("Product Not Found");
+        if (!product) {
+            logger.info(`Product not found with ID: ${productId}`);
+            return res.status(404).json("Product Not Found");
+        }
+        
+        logger.info(`Successfully retrieved product with ID: ${productId}`);
+        res.status(200).json(product);
+    } catch (error) {
+        logger.error(`Failed to get product by ID: ${productId}`, error);
+        res.status(500).json('Failed to get Product !');
     }
-    res.status(200).json(product);
 }
 
 exports.createNewProduct = async (req, res) => {
+    logger.info("Creating new product");
     try {
         const product = await productDao.newProduct(req.body);
-        res.status(201).json(product)
-    } catch (err) {
-        console.log("Failed to create Product !", err);
-        res.status(500).json('Failed to create Product !')
+        logger.info(`Successfully created product with ID: ${product._id}`);
+        res.status(201).json(product);
+    } catch (error) {
+        logger.error("Failed to create product", error);
+        res.status(500).json('Failed to create Product !');
     }
 }
 
 exports.updateProduct = async (req, res) => {
+    const productId = req.params.id;
+    logger.info(`Updating product with ID: ${productId}`);
+    
     try {
-        const productId = req.params.id;
         const product = await productDao.updateProduct(productId, req.body);
 
         if (!product) {
-            res.status(404).json("Product Not Found");
+            logger.info(`Product not found for update with ID: ${productId}`);
+            return res.status(404).json("Product Not Found");
         }
-        res.status(201).json(product)
-    } catch (err) {
-        res.status(500).json('Failed to update Product !')
+        
+        logger.info(`Successfully updated product with ID: ${productId}`);
+        res.status(200).json(product);
+    } catch (error) {
+        logger.error(`Failed to update product with ID: ${productId}`, error);
+        res.status(500).json('Failed to update Product !');
     }
 }
 
 exports.deleteProduct = async (req, res) => {
+    const productId = req.params.id;
+    logger.info(`Deleting product with ID: ${productId}`);
+    
     try {
-        const productId = req.params.id;
         const product = await productDao.deleteProduct(productId);
 
         if (!product) {
-            res.status(404).json("Product Not Found");
+            logger.info(`Product not found for deletion with ID: ${productId}`);
+            return res.status(404).json("Product Not Found");
         }
-        res.json("Deleted Successful !")
-    } catch (err) {
-        res.status(500).json('Failed to delete Product !')
+        
+        logger.info(`Successfully deleted product with ID: ${productId}`);
+        res.json("Deleted Successfully !");
+    } catch (error) {
+        logger.error(`Failed to delete product with ID: ${productId}`, error);
+        res.status(500).json('Failed to delete Product !');
     }
 }
