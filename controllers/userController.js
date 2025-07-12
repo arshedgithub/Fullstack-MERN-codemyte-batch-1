@@ -1,4 +1,5 @@
-const User = require('./../models/User');
+const userDao = require("../dao/userDao");
+const logger = require("../utils/logger");
 
 exports.getAllUsers = async (req, res) => {
     try {
@@ -6,20 +7,21 @@ exports.getAllUsers = async (req, res) => {
         const limit = parseInt(req.query.limit) || 10;
         const sort = req.query.sort || 'name';
 
-        const result = await User.findWithPagination(page, limit, sort);
+        const result = await userDao.findWithPagination(page, limit, sort);
         res.status(200).json({
             success: true,
             data: result.users,
             pagination: result.pagination
         });
     } catch (error) {
+        logger.error(error, "userController", "getAllUsers");
         res.status(500).json('Failed to get Users !')
     }
 }
 
 exports.getUserById = async (req, res) => {
     const userId = req.params.id;
-    const user = await User.findById(userId);
+    const user = await userDao.findById(userId);
 
     if (!user) {
         res.status(404).json("User Not Found");
@@ -29,7 +31,15 @@ exports.getUserById = async (req, res) => {
 
 exports.createNewUser = async (req, res) => {
     try {
-        const user = await User.newUser(req.body);
+        // const name = req.body.name
+        // const email = req.body.email
+        const { name, email } = req.body
+
+        if (!name || !email) {
+            res.status(400).json('MIssing Required Fields')
+        }
+
+        const user = await userDao.newUser(req.body);
         res.status(201).json(user)
     } catch (err) {
         console.log("Failed to create User !", err);
@@ -40,7 +50,7 @@ exports.createNewUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await User.updateUser(userId, req.body);
+        const user = await userDao.updateUser(userId, req.body);
 
         if (!user) {
             res.status(404).json("User Not Found");
@@ -54,7 +64,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         const userId = req.params.id;
-        const user = await User.deleteUser(userId);
+        const user = await userDao.deleteUser(userId);
 
         if (!user) {
             res.status(404).json("User Not Found");

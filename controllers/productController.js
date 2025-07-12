@@ -1,25 +1,30 @@
-const Product = require('../models/Product');
+const productDao = require('../dao/productDao');
+const logger = require('../utils/logger');
 
 exports.getAllProducts = async (req, res) => {
+    logger.info("getting All Products", "productController", "getAllProducts");
+
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const sort = req.query.sort || 'name';
 
-        const result = await Product.findWithPagination(page, limit, sort);
+        const result = await productDao.findWithPagination(page, limit, sort);
+        logger.info("All Products retrieved succesfully", "productController", "getAllProducts");
         res.status(200).json({
             success: true,
             data: result.products,
             pagination: result.pagination
         });
     } catch (error) {
+        logger.error(error, "productController", "getAllProducts");
         res.status(500).json('Failed to create Product !')
     }
 }
 
 exports.getProductById = async (req, res) => {
     const productId = req.params.id;
-    const product = await Product.findById(productId);
+    const product = await productDao.findById(productId);
 
     if (!product) {
         res.status(404).json("Product Not Found");
@@ -29,7 +34,7 @@ exports.getProductById = async (req, res) => {
 
 exports.createNewProduct = async (req, res) => {
     try {
-        const product = await Product.newProduct(req.body);
+        const product = await productDao.newProduct(req.body);
         res.status(201).json(product)
     } catch (err) {
         console.log("Failed to create Product !", err);
@@ -40,7 +45,7 @@ exports.createNewProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;
-        const product = await Product.updateProduct(productId, req.body);
+        const product = await productDao.updateProduct(productId, req.body);
 
         if (!product) {
             res.status(404).json("Product Not Found");
@@ -54,7 +59,7 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
     try {
         const productId = req.params.id;
-        const product = await Product.deleteProduct(productId);
+        const product = await productDao.deleteProduct(productId);
 
         if (!product) {
             res.status(404).json("Product Not Found");
