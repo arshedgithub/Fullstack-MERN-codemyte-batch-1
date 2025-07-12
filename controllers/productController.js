@@ -2,7 +2,7 @@ const productDao = require('../dao/productDao');
 const logger = require('../utils/logger');
 
 exports.getAllProducts = async (req, res) => {
-    logger.info("getting All Products", "productController", "getAllProducts");
+    logger.info("getting All Products");
 
     try {
         const page = parseInt(req.query.page) || 1;
@@ -10,14 +10,14 @@ exports.getAllProducts = async (req, res) => {
         const sort = req.query.sort || 'name';
 
         const result = await productDao.findWithPagination(page, limit, sort);
-        logger.info("All Products retrieved succesfully", "productController", "getAllProducts");
+        logger.info("All Products retrieved succesfully", "produtController", "getAllProducts");
         res.status(200).json({
             success: true,
             data: result.products,
             pagination: result.pagination
         });
     } catch (error) {
-        logger.error(error, "productController", "getAllProducts");
+        logger.error("Error in get All products", error);
         res.status(500).json('Failed to create Product !')
     }
 }

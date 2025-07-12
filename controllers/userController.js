@@ -2,19 +2,22 @@ const userDao = require("../dao/userDao");
 const logger = require("../utils/logger");
 
 exports.getAllUsers = async (req, res) => {
+    logger.info("Getting All users")
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const sort = req.query.sort || 'name';
 
         const result = await userDao.findWithPagination(page, limit, sort);
+        logger.info("successfully retreived All users")
+
         res.status(200).json({
             success: true,
             data: result.users,
             pagination: result.pagination
         });
     } catch (error) {
-        logger.error(error, "userController", "getAllUsers");
+        logger.error(error);
         res.status(500).json('Failed to get Users !')
     }
 }
