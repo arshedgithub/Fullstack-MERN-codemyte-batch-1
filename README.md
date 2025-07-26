@@ -32,6 +32,10 @@ Middleware functions in Express are used to:
 
 Middleware functions have access to the `req`, `res`, and `next()` objects, and they run before the final route handler.
 
+<img width="800" height="670" alt="image" src="https://github.com/user-attachments/assets/6368bdaf-d978-4fcd-a6df-c0d938a76d72" />
+
+Visit [**Post in Linkedin**](https://www.linkedin.com/posts/codemyte-academy_expressjs-nodejs-javascript-activity-7349880199846518784--B6l?utm_source=share&utm_medium=member_desktop&rcm=ACoAADaqF2UB8YHdWcl46h3lzladB28GEfnpdrw)
+
 ## 📦 DTO & Validation
 
 ### 🧾 DTO (Data Transfer Object)
