@@ -1,16 +1,19 @@
-export const createUserDtoSchema = {
+const createUserDtoSchema = {
     type: 'object',
     properties: {
         name: {
-            type: String,
+            type: 'string',
         },
         email: {
-            type: email
+            type: 'string',
+            format: 'email'
         }
     },
     required: ['name', 'email'],
     additionalProperties: false
-}
+};
+
+module.exports = { createUserDtoSchema };
 
 // ajv - library for validation
 
