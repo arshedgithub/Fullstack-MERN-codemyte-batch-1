@@ -1,85 +1,53 @@
-## Day 5 - RESTful API Design
+# 🚀 Day 7 – Git & GitHub Essentials
 
-`client` => `server` (Request)
+---
 
-`client` <= `server` (Response)
+## 🛠️ Git Installation
 
-API - Application Programming Interface
+To get started with version control, first install Git:
 
-### API Architecural styles
+### 📦 Installation Links:
 
-- SOAP - XML
+- [Download Git for Windows](https://git-scm.com/download/win)
+- [Download Git for macOS](https://git-scm.com/download/mac)
+- [Download Git for Linux](https://git-scm.com/download/linux)
 
-- REST - HTTP
+After installation, check Git version:
 
-- GraphQL - Query Language
+```bash
+git --version
+```
 
-- gRPC
+## 🌐 Beginning with GitHub
+GitHub is a cloud-based platform that hosts your Git repositories and enables team collaboration.
 
-- websocket
+### ✅ To start using GitHub:
+Sign up at [***github.com***](github.com)
 
+Create a new repository (public or private)
 
-## REST - REpresentational State Transfer
+Connect your local project to GitHub (see commands below)
 
-RESTful API - RESTful Services
+## 🧩 Common Git Commands
 
+### Command	Description
+- `git init`	🧱 Start a new Git repository
+- `git add .`➕ Stage all changed files
+- `git commit -m "msg"`	💾 Save staged changes with a message
+- `git push`	🚀 Upload commits to a remote GitHub repository
+- `git pull`	🔄 Download and merge changes from remote
+- `git status`	📋 View current changes and status
+- `git log`	🕓 Show commit history
 
-### HTTP Methods
+### 📌 Example Workflow
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/username/repo.git
+git push -u origin main
+```
 
-verbs
+## 🔗 LinkedIn Post for Git & GitHub Slides
 
-CRUD Operations - Create, Read, Update, Delete
-
-`GET` - Read
-
-`PUT` - Update
-
-`POST` - Create
-
-`DELETE` - Delete
-
-### Resources
-
-Product Model -> products (plural)
-
-GET `/api/products` => all products 
-
-GET `/api/products/:id` => relevant user 
-
-POST `/api/products` => new user
-
-PUT `/api/products/:id` => edit user
-
-DELETE `/api/products/:id` => delete user
-
-### /api Prefix
-
-- `/api`
-  
-- `api.` -> subdomain
-
-### Version Controlling
-
-- `/api/v1/products`, `/api/v2/products`, `/api/v3/products`
-
-- version controlling - Git
-
-### HTTP Status code ranges
-
-Range	Type	Meaning
-- 100-199	 `Informational`	Request received, continuing process.
-- 200-299	 `Success`	The request was successfully received, understood, and accepted.
-- 300-399	 `Redirection`	Further action is needed to complete the request (often involves URL redirection).
-- 400-499	 `Client Error`	The request contains bad syntax or cannot be fulfilled (error on the client’s side).
-- 500-599	 `Server Error`	The server failed to fulfill a valid request (error on the server’s side).
-
-
-### Pagination
-
-Query Params
-
-- `limit` - how many items per page
-- `page` - which page items should display 
-- `sort` - sort on which field
-
-
+[Visit Slides in Linkedin](https://www.linkedin.com/posts/codemyte-academy_git-github-everything-you-need-to-know-activity-7354354964179177475-QVWN?utm_source=share&utm_medium=member_desktop&rcm=ACoAADaqF2UB8YHdWcl46h3lzladB28GEfnpdrw)
