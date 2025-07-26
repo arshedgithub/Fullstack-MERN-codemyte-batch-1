@@ -1,85 +1,52 @@
-## Day 5 - RESTful API Design
+# 🚀 Day 6 – Error Handling and Validation
 
-`client` => `server` (Request)
+---
 
-`client` <= `server` (Response)
+## 📝 Logger – Winston
 
-API - Application Programming Interface
+We use [**winston**](https://www.npmjs.com/package/winston) for logging:
 
-### API Architecural styles
+- ❌  Errors
+- ⚠️  Warnings
+- ℹ️  Informational messages
 
-- SOAP - XML
+This helps track, debug, and monitor application behavior.
 
-- REST - HTTP
+### 📦 Installation
 
-- GraphQL - Query Language
+```bash
+npm install winston
+```
 
-- gRPC
+## 🧩 Middlewares
 
-- websocket
+Middleware functions in Express are used to:
 
+- Handle errors centrally
 
-## REST - REpresentational State Transfer
+- Log incoming requests and responses
 
-RESTful API - RESTful Services
+- Perform validation before reaching controllers
 
+- Authorize user access based on roles
 
-### HTTP Methods
+Middleware functions have access to the `req`, `res`, and `next()` objects, and they run before the final route handler.
 
-verbs
+## 📦 DTO & Validation
 
-CRUD Operations - Create, Read, Update, Delete
+### 🧾 DTO (Data Transfer Object)
+DTOs are used to structure and validate incoming request data from the client. They help ensure that the data received by the server is in the correct format.
 
-`GET` - Read
+### 🗄️ DAO (Data Access Object)
+DAOs are used to interact with the database. They encapsulate all data access logic and keep the business logic separate and clean.
 
-`PUT` - Update
+### ✅ Validation with AJV
+We use [**ajv**](https://www.npmjs.com/package/ajv) – Another JSON Schema Validator – to validate DTOs.
 
-`POST` - Create
+It allows us to define JSON schema rules for validating input data before processing it in the controller.
 
-`DELETE` - Delete
+### 📦 Installation
 
-### Resources
-
-Product Model -> products (plural)
-
-GET `/api/products` => all products 
-
-GET `/api/products/:id` => relevant user 
-
-POST `/api/products` => new user
-
-PUT `/api/products/:id` => edit user
-
-DELETE `/api/products/:id` => delete user
-
-### /api Prefix
-
-- `/api`
-  
-- `api.` -> subdomain
-
-### Version Controlling
-
-- `/api/v1/products`, `/api/v2/products`, `/api/v3/products`
-
-- version controlling - Git
-
-### HTTP Status code ranges
-
-Range	Type	Meaning
-- 100-199	 `Informational`	Request received, continuing process.
-- 200-299	 `Success`	The request was successfully received, understood, and accepted.
-- 300-399	 `Redirection`	Further action is needed to complete the request (often involves URL redirection).
-- 400-499	 `Client Error`	The request contains bad syntax or cannot be fulfilled (error on the client’s side).
-- 500-599	 `Server Error`	The server failed to fulfill a valid request (error on the server’s side).
-
-
-### Pagination
-
-Query Params
-
-- `limit` - how many items per page
-- `page` - which page items should display 
-- `sort` - sort on which field
-
-
+```bash
+npm install ajv
+```
