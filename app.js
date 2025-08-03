@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const userRoute = require('./routes/userRoutes');
 const productRoute = require('./routes/productRoutes');
+const authRoute = require('./routes/authRoutes');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get('/', function (req, res) {
 
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
+app.use('/api/auth', authRoute);
 
 const port = 4000;
 app.listen(port, function () {
