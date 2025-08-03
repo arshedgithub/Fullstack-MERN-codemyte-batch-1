@@ -5,8 +5,12 @@ function App() {
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState('Hello World!');
   const [isError, setIsError] = useState(false);
-  // kind of a dynamic object in component memory 
 
+  const [formData, setFormData] = useState({
+    name: '',
+    address: '',
+    contact: ''
+  })
   // jsx - javascript xml 
 
   useEffect(() => {
