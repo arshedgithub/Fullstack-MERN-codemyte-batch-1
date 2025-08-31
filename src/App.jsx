@@ -12,11 +12,14 @@ function App() {
   const [backgroundClass, setBackgroundClass] = useState('day');
   const scrollRefs = useRef({});
 
+  // Load last searched city or defaul city
   useEffect(() => {
-    const defaultCity = 'colombo';
-    setCity(defaultCity)
-    fetchWeather(defaultCity);
-    fetchHourlyWeather(defaultCity);
+    const savedCity = localStorage.getItem('lastSearchedCity');
+    const cityToLoad = savedCity || 'colombo';
+    
+    setCity(cityToLoad);
+    fetchWeather(cityToLoad);
+    fetchHourlyWeather(cityToLoad);
   }, []);
 
   const getBackgroundClass = (weatherData) => {
@@ -77,6 +80,7 @@ function App() {
       const bgClass = getBackgroundClass(response.data);
       setBackgroundClass(bgClass);
       setError('');
+      localStorage.setItem('lastSearchedCity', city);
     } catch (err) {
       console.log(err.response.data);
       setError('City not found!');
@@ -102,8 +106,8 @@ function App() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      fetchWeather();
-      fetchHourlyWeather();
+      fetchWeather(city);
+      fetchHourlyWeather(city);
     }
   };
 
@@ -119,7 +123,10 @@ function App() {
         onKeyDown={handleKeyDown}
       />
 
-      <button onClick={fetchWeather}>Get Weather</button>
+      <button onClick={() => {
+        fetchWeather(city);
+        fetchHourlyWeather(city);
+      }}>Get Weather</button>
 
       {error && <p className="error">{error}</p>}
 
