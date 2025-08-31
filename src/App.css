@@ -30,3 +30,136 @@ button {
   color: red;
   margin-top: 10px;
 }
+
+/* Forecast Styles */
+.forecast-container {
+  margin-top: 30px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.forecast-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.day-row {
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.day-header {
+  color: white;
+  margin: 0 0 15px 0;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.forecast-cards {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.forecast-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 15px;
+  min-width: 150px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.forecast-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.time {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.weather-icon {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.weather-icon img {
+  width: 50px;
+  height: 50px;
+}
+
+.temp-range {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.temp-max {
+  color: #ff6b6b;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.temp-min {
+  color: #4ecdc4;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.weather-desc {
+  font-size: 12px;
+  color: #555;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.weather-details {
+  font-size: 11px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 2px 0;
+}
+
+.label {
+  color: #777;
+  font-weight: 500;
+}
+
+.value {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .forecast-cards {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .forecast-card {
+    min-width: auto;
+  }
+  
+  .day-row {
+    padding: 15px;
+  }
+}
