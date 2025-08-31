@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -12,20 +12,21 @@ function App() {
   const [backgroundClass, setBackgroundClass] = useState('day');
   const scrollRefs = useRef({});
 
+  useEffect(() => {
+    const defaultCity = 'colombo';
+    setCity(defaultCity)
+    fetchWeather(defaultCity);
+    fetchHourlyWeather(defaultCity);
+  }, []);
+
   const getBackgroundClass = (weatherData) => {
     if (!weatherData) return 'day';
     
     const icon = weatherData.weather[0].icon;
-    console.log('Weather icon:', icon);
     
     // d = day, n = night
-    if (icon.endsWith('d')) {
-      console.log('It\'s day time');
-      return 'day';
-    } else if (icon.endsWith('n')) {
-      console.log('It\'s night time');
-      return 'night';
-    }
+    if (icon.endsWith('d')) return 'day';
+    else if (icon.endsWith('n')) return 'night';
     
     // Fallback to day if icon doesn't end with d or n
     return 'day';
@@ -65,7 +66,7 @@ function App() {
     }
   };
 
-  const fetchWeather = async () => {
+  const fetchWeather = async (city) => {
     if (!city) return;
 
     try {
@@ -83,7 +84,7 @@ function App() {
     }
   };
 
-  const fetchHourlyWeather = async () => {
+  const fetchHourlyWeather = async (city) => {
     if (!city) return;
 
     try {
