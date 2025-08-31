@@ -66,6 +66,85 @@ button {
   gap: 15px;
   overflow-x: auto;
   padding: 10px 0;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.forecast-cards::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.forecast-cards-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.scroll-indicator:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+}
+
+.scroll-left {
+  left: 10px;
+}
+
+.scroll-right {
+  right: 10px;
+}
+
+.scroll-indicator svg {
+  width: 20px;
+  height: 20px;
+  fill: #667eea;
+}
+
+.scroll-indicator:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* Gradient fade effect for scroll indication */
+.forecast-cards-container::before,
+.forecast-cards-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.forecast-cards-container::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(102, 126, 234, 0.1), transparent);
+}
+
+.forecast-cards-container::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(102, 126, 234, 0.1), transparent);
 }
 
 .forecast-card {
