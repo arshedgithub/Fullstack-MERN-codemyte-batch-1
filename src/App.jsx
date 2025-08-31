@@ -9,7 +9,27 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [error, setError] = useState('');
+  const [backgroundClass, setBackgroundClass] = useState('day');
   const scrollRefs = useRef({});
+
+  const getBackgroundClass = (weatherData) => {
+    if (!weatherData) return 'day';
+    
+    const icon = weatherData.weather[0].icon;
+    console.log('Weather icon:', icon);
+    
+    // d = day, n = night
+    if (icon.endsWith('d')) {
+      console.log('It\'s day time');
+      return 'day';
+    } else if (icon.endsWith('n')) {
+      console.log('It\'s night time');
+      return 'night';
+    }
+    
+    // Fallback to day if icon doesn't end with d or n
+    return 'day';
+  };
 
   const groupForecastByDay = (forecastData) => {
     const grouped = {};
@@ -53,6 +73,8 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
       );
       setWeather(response.data);
+      const bgClass = getBackgroundClass(response.data);
+      setBackgroundClass(bgClass);
       setError('');
     } catch (err) {
       console.log(err.response.data);
@@ -85,7 +107,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className={`app ${backgroundClass}`}>
       <h1>Weather App</h1>
 
       <input
@@ -104,9 +126,34 @@ function App() {
         <div className="weather-box">
           <h2>{weather.name}, {weather.sys.country}</h2>
           <p>{weather.weather[0].main} - {weather.weather[0].description}</p>
-          <h3>{weather.main.temp} °C</h3>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Wind: {weather.wind.speed} m/s</p>
+          
+          <div className="weather-main-info">
+            <img 
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+              alt={weather.weather[0].description}
+              className="weather-icon-large"
+            />
+            <h3>{Math.round(weather.main.temp)}°C</h3>
+          </div>
+          
+          <div className="weather-details-grid">
+            <div className="weather-detail-item">
+              <span className="weather-detail-label">Humidity</span>
+              <span className="weather-detail-value">{weather.main.humidity}%</span>
+            </div>
+            <div className="weather-detail-item">
+              <span className="weather-detail-label">Wind Speed</span>
+              <span className="weather-detail-value">{weather.wind.speed} m/s</span>
+            </div>
+            <div className="weather-detail-item">
+              <span className="weather-detail-label">Pressure</span>
+              <span className="weather-detail-value">{weather.main.pressure} hPa</span>
+            </div>
+            <div className="weather-detail-item">
+              <span className="weather-detail-label">Feels Like</span>
+              <span className="weather-detail-value">{Math.round(weather.main.feels_like)}°C</span>
+            </div>
+          </div>
         </div>
       )}
 
