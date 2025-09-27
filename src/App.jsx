@@ -1,17 +1,11 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import AppRoutes from './routes/AppRoutes';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-1 flex items-center justify-center">
-        <p className='text-3xl font-bold text-center'>App</p>
-      </main>
-      <Footer />
-    </div>
-  );
+    <main className="flex-grow bg-gray-50">
+      <AppRoutes />
+    </main>);
 }
 export default App;
