@@ -1,5 +1,4 @@
-# 🚀 Day 7 – Git & GitHub Essentials
-
+# 🚀 Day 10 – Weather Application
 ---
 
 ## 🛠️ Git Installation
@@ -11,6 +10,9 @@ To get started with version control, first install Git:
 - [Download Git for Windows](https://git-scm.com/download/win)
 - [Download Git for macOS](https://git-scm.com/download/mac)
 - [Download Git for Linux](https://git-scm.com/download/linux)
+
+- Weahter Icons: https://openweathermap.org/img/wn/01d@2x.png
+- Weather Forecast API Doc: https://openweathermap.org/forecast5
 
 After installation, check Git version:
 
@@ -31,13 +33,7 @@ Connect your local project to GitHub (see commands below)
 ## 🧩 Common Git Commands
 
 ### Command	Description
-- `git init`	🧱 Start a new Git repository
-- `git add .`➕ Stage all changed files
-- `git commit -m "msg"`	💾 Save staged changes with a message
-- `git push`	🚀 Upload commits to a remote GitHub repository
-- `git pull`	🔄 Download and merge changes from remote
-- `git status`	📋 View current changes and status
-- `git log`	🕓 Show commit history
+-
 
 ### 📌 Example Workflow
 ```bash
