@@ -3,9 +3,9 @@ import Footer from "../components/Footer";
 import ProductCard from "../components/ProductCard";
 
 const products = [
-  { id: "1", name: "Smartphone", price: 600, imageUrl: "/images/phone.jpg", description: "Latest model smartphone." },
-  { id: "2", name: "Tablet", price: 350, imageUrl: "/images/tablet.jpg", description: "Portable & powerful." },
-  { id: "3", name: "Smart TV", price: 750, imageUrl: "/images/tv.jpg", description: "Ultra HD 4K smart TV." },
+  { id: "1", name: "Smartphone", price: 600, imageUrl: "/assets/phone.png", description: "Latest model smartphone." },
+  { id: "2", name: "Wireless Headphones", price: 85, imageUrl: "/assets/headphone.png", description: "Noise-cancelling comfort." },
+  { id: "3", name: "Smart TV", price: 750, imageUrl: "/assets/tv.png", description: "Ultra HD 4K smart TV." },
 ];
 
 export default function Products() {
